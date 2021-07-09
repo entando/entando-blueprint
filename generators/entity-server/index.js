@@ -18,8 +18,6 @@ module.exports = class extends EntityServerGenerator {
         )}`,
       );
     }
-
-    this.configOptions = jhContext.configOptions || {};
   }
 
   get initializing() {
@@ -32,8 +30,27 @@ module.exports = class extends EntityServerGenerator {
   }
 
   get configuring() {
-    // selectedWidgets can be used to select widgets we want to generate. For the moment all will be generated.
+    // Here we are not overriding this phase and hence its being handled by JHipster
     return super._configuring();
+  }
+
+  get composing() {
+    // Here we are not overriding this phase and hence its being handled by JHipster
+    return super._composing();
+  }
+
+  get loading() {
+    // Here we are not overriding this phase and hence its being handled by JHipster
+    return super._loading();
+  }
+
+  get preparing() {
+    // Here we are not overriding this phase and hence its being handled by JHipster
+    return super._preparing();
+  }
+
+  get preparingFields() {
+    return super._preparingFields();
   }
 
   get default() {
@@ -49,9 +66,9 @@ module.exports = class extends EntityServerGenerator {
     return { ...jhipsterWritingPhase, ...entandoWritingPhase };
   }
 
-  get conflicts() {
-    // conflicts - Where conflicts are handled (used internally), no super._conflicts
-    return null;
+  get postWriting() {
+    // Here we are not overriding this phase and hence its being handled by JHipster
+    return super._postWriting();
   }
 
   get install() {

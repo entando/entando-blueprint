@@ -16,44 +16,17 @@ module.exports = class extends EntityGenerator {
         )}`,
       );
     }
-
-    this.configOptions = jhContext.configOptions || {};
-    // This sets up options for this sub generator and is being reused from JHipster
-    jhContext.setupEntityOptions(this, jhContext, this);
-
-    // TODO JHipster v7 use getJhipsterConfig instead https://github.com/jhipster/generator-jhipster/pull/12022
-    const configuration = this.getAllJhipsterConfig();
-    this.databaseType = configuration.databaseType;
   }
 
   get initializing() {
-    const jhipsterInitializingPhase = super._initializing();
-
-    if (!this.databaseType || this.databaseType === 'no') {
-      return {
-        ...jhipsterInitializingPhase,
-        validateDbExistence() {
-          this.info('Skipping default JHipster validateDbExistence step');
-        },
-        validateTableName() {
-          this.info('Skipping default JHipster validateTableName');
-        },
-      };
-    }
-
-    return jhipsterInitializingPhase;
-  }
-
-  _prompting() {
-    // prompting - Where you prompt users for options (where you’d call this.prompt())
-    const jhipsterPromptingPhase = super._prompting();
-
-    return { ...jhipsterPromptingPhase, ...prompts };
+    return super._initializing();
   }
 
   get prompting() {
     // Here we are not overriding this phase and hence its being handled by JHipster
-    return this._prompting();
+    const jhipsterPromptingPhase = super._prompting();
+
+    return { ...jhipsterPromptingPhase, ...prompts };
   }
 
   get configuring() {
@@ -61,25 +34,62 @@ module.exports = class extends EntityGenerator {
     return super._configuring();
   }
 
-  get writing() {
-    const jhipsterWritingPhase = super._writing();
-    const { context, configOptions } = this;
+  get composing() {
+    const jhipsterComposingPhase = super._composing();
+    const { context } = this;
 
     return {
-      ...jhipsterWritingPhase,
+      ...jhipsterComposingPhase,
       ...{
         composeMicrofrontend() {
-          this.composeWith(require.resolve('../entity-microfrontend'), {
+          this.composeWith(require.resolve('../entity-microfrontend'), true, {
             context,
-            configOptions,
           });
         },
       },
     };
   }
 
+  get loading() {
+    // Here we are not overriding this phase and hence its being handled by JHipster
+    return super._loading();
+  }
+
+  get preparingFields() {
+    return super._preparingFields();
+  }
+
+  get preparing() {
+    // Here we are not overriding this phase and hence its being handled by JHipster
+    return super._preparing();
+  }
+
+  get preparingRelationships() {
+    // Here we are not overriding this phase and hence its being handled by JHipster
+    return super._preparingRelationships();
+  }
+
+  get default() {
+    // Here we are not overriding this phase and hence its being handled by JHipster
+    return super._default();
+  }
+
+  get writing() {
+    return super._writing();
+  }
+
+  get postWriting() {
+    // Here we are not overriding this phase and hence its being handled by JHipster
+    return super._postWriting();
+  }
+
   get install() {
     // Here we are not overriding this phase and hence its being handled by JHipster
     return super._install();
+  }
+
+  get end() {
+    // Here we are not overriding this phase and hence its being handled by JHipster
+    return super._end();
   }
 };

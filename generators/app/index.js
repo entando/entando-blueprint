@@ -18,10 +18,6 @@ module.exports = class extends AppGenerator {
         )}`,
       );
     }
-
-    this.configOptions = jhContext.configOptions || {};
-    // This sets up options for this sub generator and is being reused from JHipster
-    jhContext.setupEntityOptions(this, jhContext, this);
   }
 
   get initializing() {
@@ -41,6 +37,21 @@ module.exports = class extends AppGenerator {
     return super._configuring();
   }
 
+  get composing() {
+    // Here we are not overriding this phase and hence its being handled by JHipster
+    return super._composing();
+  }
+
+  get loading() {
+    // Here we are not overriding this phase and hence its being handled by JHipster
+    return super._loading();
+  }
+
+  get preparing() {
+    // Here we are not overriding this phase and hence its being handled by JHipster
+    return super._preparing();
+  }
+
   get default() {
     // default - If the method name doesn’t match a priority, it will be pushed to this group.
     return super._default();
@@ -49,6 +60,16 @@ module.exports = class extends AppGenerator {
   get writing() {
     // writing - Where you write the generator specific files (routes, controllers, etc)
     return super._writing();
+  }
+
+  get postWriting() {
+    // Here we are not overriding this phase and hence its being handled by JHipster
+    return super._postWriting();
+  }
+
+  get install() {
+    // Here we are not overriding this phase and hence its being handled by JHipster
+    return super._install();
   }
 
   get end() {
